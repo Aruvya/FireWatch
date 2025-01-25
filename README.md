@@ -112,8 +112,7 @@
 
 1. **Solar-Powered Operation**: Integrate solar panels for extended deployment in remote areas.
 2. **Data Storage**: Add an SD card module for logging sensor readings.
-3. **Network Integration**: Enable connectivity to IoT platforms for centralized monitoring.
-4. **Improved Detection**: Use more advanced sensors for better accuracy and sensitivity.
+3. **Improved Detection**: Use more advanced sensors for better accuracy and sensitivity.
 
 ---
 
