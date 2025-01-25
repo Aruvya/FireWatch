@@ -1,37 +1,36 @@
-#include <LiquidCrystal_I2C.h>       // Подключение библиотеки для LCD-дисплея с интерфейсом I2C
-#include <Wire.h>                    // Подключение библиотеки для работы с I2C
-#include <iarduino_RF433_Receiver.h> // Подключение библиотеки для 433 МГц приемника (MX-RM-5V)
+#include <LiquidCrystal_I2C.h>       // Include the library for an LCD display with an I2C interface
+#include <Wire.h>                    // Include the library for I2C communication
+#include <iarduino_RF433_Receiver.h> //  Include the library for the 433 MHz receiver (MX-RM-5V)
 
-// Инициализация компонентов
-iarduino_RF433_Receiver radio(2);    // Объект приемника, пин 2 для подключения
-LiquidCrystal_I2C lcd(0x27, 16, 2);  // LCD-дисплей с I2C адресом 0x27, размером 16x2 символов
+// Component initialization
+iarduino_RF433_Receiver radio(2);    // Create the receiver object, pin 2 for connection
+LiquidCrystal_I2C lcd(0x27, 16, 2);  // Initialize the LCD display with I2C address 0x27, 16x2 characters
 
-int data;                            // Переменная для хранения принимаемых данных
-
+int data;                            // Variable to store received data
 void setup() {
-    Serial.begin(19200);             // Инициализация серийного порта для отладки
-    radio.begin();                   // Инициализация приемника
-    radio.setDataRate(i433_1KBPS);   // Установка скорости приема данных (1 Кбит/с)
-    radio.openReadingPipe(5);        // Открытие канала 5 для приема данных
-    radio.startListening();          // Запуск режима прослушивания
-    lcd.init();                      // Инициализация LCD-дисплея
-    lcd.backlight();                 // Включение подсветки дисплея
-    lcd.clear();                     // Очистка дисплея перед началом работы
+    Serial.begin(19200);             // Initialize the serial port for debugging
+    radio.begin();                   // Initialize the receiver
+    radio.setDataRate(i433_1KBPS);   // Set the data reception rate to 1 Kbps
+    radio.openReadingPipe(5);        // Open channel 5 for receiving data
+    radio.startListening();          // Start listening mode
+    lcd.init();                      // Initialize the LCD display
+    lcd.backlight();                 // Turn on the backlight
+    lcd.clear();                     // Clear the display before use
 }
 
 void loop() {
-    if (radio.available()) {         // Проверка наличия данных в буфере приемника
-        radio.read(&data, sizeof(data)); // Чтение данных и сохранение в переменную `data`
+    if (radio.available()) {         // Check if data is available in the receiver buffer
+        radio.read(&data, sizeof(data)); // Read the data into the data variable
 
-        // Логирование данных в Serial Monitor
+        // Log the data to the Serial Monitor
         Serial.println("Полученные данные: " + String(data));
 
-        // Вывод данных на LCD-дисплей
-        lcd.clear();                 // Очистка дисплея перед выводом новых данных
-        lcd.setCursor(0, 0);         // Установка курсора в начало первой строки
-        lcd.print("Данные: ");       // Печать заголовка
-        lcd.print(data);             // Печать данных
+        // Display the data on the LCD screen
+        lcd.clear();                 // Clear the display before showing new data
+        lcd.setCursor(0, 0);         // Set the cursor to the beginning of the first row
+        lcd.print("Данные: ");       // Print the label
+        lcd.print(data);             // Print the received data
 
-        delay(5000);                 // Задержка для отображения данных
+        delay(5000);                 // Delay to keep the data visible on the screen
     }
 }
