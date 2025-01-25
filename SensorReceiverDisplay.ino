@@ -1,6 +1,6 @@
 #include <LiquidCrystal_I2C.h>       // Include the library for an LCD display with an I2C interface
 #include <Wire.h>                    // Include the library for I2C communication
-#include <iarduino_RF433_Receiver.h> //  Include the library for the 433 MHz receiver (MX-RM-5V)
+#include <iarduino_RF433_Receiver.h> // Include the library for the 433 MHz receiver (MX-RM-5V)
 
 // Component initialization
 iarduino_RF433_Receiver radio(2);    // Create the receiver object, pin 2 for connection
