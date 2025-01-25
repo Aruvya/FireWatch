@@ -27,17 +27,17 @@ void loop() {
     // Read temperature
     float temperature = dht.readTemperature();
     if (!isnan(temperature)) {            // Check if the data is valid
-        Serial.println("Температура: " + String(temperature) + "°C");   
+        Serial.println("Температура: " + String(temperature) + "°C");     // Log the temperature  
         sendSensorData((int)temperature); // Send the temperature (cast to int for simplicity)
     }
 
-    // Считывание данных датчика газа
-    int gasValue = analogRead(analogSignal);
-    Serial.println("Уровень газа: " + String(gasValue));
-    sendSensorData(gasValue);
+    // Read gas sensor data
+    int gasValue = analogRead(analogSignal);  
+    Serial.println("Уровень газа: " + String(gasValue));                 // Log the gas level
+    sendSensorData(gasValue);            // Send the gas level
 
-    // Считывание данных датчика пламени
+    // Read flame sensor data
     int flameValue = analogRead(flamePin);
-    Serial.println("Уровень пламени: " + String(flameValue));
-    sendSensorData(flameValue);
+    Serial.println("Уровень пламени: " + String(flameValue));           // Log the flame level
+    sendSensorData(flameValue);          // Send the flame level
 }
