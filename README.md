@@ -24,13 +24,13 @@
 3. **Flame Sensor**: Detects the presence of flames.
 4. **433 MHz RF Transmitter**: Wireless data transmission module (FS1000A).
 5. **Arduino**: Microcontroller for processing sensor data.
-6. Power source (e.g., battery pack).
+6. **Power source** (e.g., battery pack).
 
 ### Receiver Module
 1. **433 MHz RF Receiver**: Wireless data reception module (MX-RM-5V).
 2. **LCD Display**: 16x2 screen with I2C interface for displaying received data.
 3. **Arduino**: Microcontroller for processing and displaying received data.
-4. Power source.
+4. **Power source.**
 
 ---
 
