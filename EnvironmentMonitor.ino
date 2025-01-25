@@ -1,34 +1,34 @@
-#include <DHT.h>                          // Подключение библиотеки для датчика температуры и влажности (DHT11)
-#include <iarduino_RF433_Transmitter.h>   // Подключение библиотеки для 433 МГц передатчика (FS1000A)
+#include <DHT.h>                          // Include the library for the DHT11 temperature and humidity sensor
+#include <iarduino_RF433_Transmitter.h>   // Include the library for the 433 MHz transmitter (FS1000A)
 
-// Настройка компонентов
-iarduino_RF433_Transmitter radio(12);     // Объект передатчика, пин 12 для подключения
-DHT dht(2, DHT11);                        // Объект датчика DHT11 на пине 2
-const int flamePin = A0;                  // Пин A0 для аналогового выхода датчика пламени
-const int analogSignal = A1;              // Пин A1 для аналогового выхода датчика газа
-const int digitalSignal = 4;              // Пин 4 для цифрового выхода датчика газа
+// Component setup
+iarduino_RF433_Transmitter radio(12);     // Create the transmitter object, pin 12 for connection
+DHT dht(2, DHT11);                        // Create the DHT11 sensor object on pin 2
+const int flamePin = A0;                  // Pin A0 for the analog output of the flame sensor
+const int analogSignal = A1;              // Pin A1 for the analog output of the gas sensor
+const int digitalSignal = 4;              // Pin 4 for the digital output of the gas sensor
 
 void setup() {
-    Serial.begin(9600);                   // Инициализация серийного порта для отладки
-    dht.begin();                          // Инициализация датчика DHT11
-    radio.begin();                        // Инициализация передатчика
-    radio.setDataRate(i433_1KBPS);        // Установка скорости передачи данных (1 Кбит/с)
-    radio.openWritingPipe(5);             // Открытие канала передачи данных (канал 5)
-    pinMode(flamePin, INPUT);             // Установка пина для датчика пламени как вход
-    pinMode(digitalSignal, INPUT);        // Установка пина для цифрового выхода датчика газа как вход
+    Serial.begin(9600);                   // Initialize the serial port for debugging
+    dht.begin();                          // Initialize the DHT11 sensor
+    radio.begin();                        // Initialize the transmitter
+    radio.setDataRate(i433_1KBPS);        // Set the data transmission rate to 1 Kbps
+    radio.openWritingPipe(5);             // Open the data transmission channel (channel 5)
+    pinMode(flamePin, INPUT);             // Set the pin for the flame sensor as input
+    pinMode(digitalSignal, INPUT);        // Set the pin for the gas sensor's digital output as input
 }
 
 void sendSensorData(int data) {
-    radio.write(&data, sizeof(data));     // Передача данных через передатчик
-    delay(5000);                          // Задержка на 5 секунд
+    radio.write(&data, sizeof(data));     // Transmit data using the transmitter
+    delay(5000);                          // Delay for 5 seconds to prevent data flooding
 }
 
 void loop() {
-    // Считывание температуры
+    // Read temperature
     float temperature = dht.readTemperature();
-    if (!isnan(temperature)) {            // Проверка на корректность данных
-        Serial.println("Температура: " + String(temperature) + "°C");
-        sendSensorData((int)temperature); // Отправка температуры (приведение к int для упрощения)
+    if (!isnan(temperature)) {            // Check if the data is valid
+        Serial.println("Температура: " + String(temperature) + "°C");   
+        sendSensorData((int)temperature); // Send the temperature (cast to int for simplicity)
     }
 
     // Считывание данных датчика газа
