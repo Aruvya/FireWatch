@@ -90,12 +90,6 @@
 
 ---
 
-## Folder Structure
-
-
-
----
-
 ## Dependencies
 
 - **Libraries for Transmitter Module**:
@@ -124,5 +118,5 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contributors
 
-- **[Your Name]** – Developer
+- **Aruzhan Sovetkhan and Assem Beissenbay** – Developers
 - Open for contributions! Feel free to submit pull requests or suggest improvements.
